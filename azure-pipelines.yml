@@ -13,7 +13,16 @@ steps:
 - script: |
     npm install
   displayName: 'npm install'
-
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Visual Studio Enterprise with MSDN(3e42acdc-92df-43d3-9f70-1c1ebdaa7546)'
+    appType: 'webApp'
+    WebAppName: 'FirstDevOps2020'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'FirstDevOps2020-rg'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 - script: |
     npm test
   displayName: 'npm test'
